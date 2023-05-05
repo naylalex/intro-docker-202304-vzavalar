@@ -1,0 +1,21 @@
+db:
+image: dbpostgres
+container_name: dbtest
+ENV: POSTGRES_HOST_AUTH_METHOD=trust
+ports: 5432
+
+words:
+image: words
+container_name: wordstest
+command: java -Xmx8m -Xms8m -jar target/words.jar
+ports: 8080
+
+web:
+image: web
+container_name: webtest
+command: ./dispatcher
+ports: 80
+
+networks:
+base_net:
+driver: bridge
